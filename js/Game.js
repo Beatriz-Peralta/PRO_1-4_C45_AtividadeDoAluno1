@@ -7,6 +7,7 @@ class Game {
 
     this.leader1 = createElement("h2");
     this.leader2 = createElement("h2");
+    this.playerMoving = false; //o jogador está se movendo
   }
 
   getState() {
@@ -155,6 +156,15 @@ class Game {
     });
   }
 
+  if (player.fuel  > 0 && this.playerMoving) { 
+    player.fuel -= 0.3;
+  }
+  
+  if (player.fuel <= 0) {
+ gameState = 2;
+ this.gameOver();
+  }
+}
   handlePowerCoins(index) {
     cars[index - 1].overlap(powerCoins, function(collector, collected) {
       player.score += 21;
@@ -176,6 +186,28 @@ handleResetButton() {
   });
 }
 
+  showFuelBar() {
+    push();
+    image(fuelImage, width / 2 - 130, height - player.positionY - 100, 20, 20);
+    fill("white");
+    rect(width / 2 - 100, height - player.positionY - 100,185,20);
+    fill"#ffc400");
+    rect(width / 2 - 100, height - player position- 100, player.fuel,
+    noStroke();
+    pop():
+  }
+    
+    gameOver() { 
+      swal({
+        title: "Fim de Jogo",
+        text: "Ops, voce perdeu a corrida. . . .!!!",
+        ImageUrl:
+         "https:??cdn.shopify.com?s/files/1/1061/1924/products/Thumbs_Down_Sign_Emogeicons/ios10/grande.png
+        imageSize: "100x100",
+        confirmButtonText: "Obrigado por Jogar"
+      });
+    }
+}
 showLife() {
   push();
   image(lifeImage, width / 2 - 130, height - player.positionY - 400, 20, 20);
